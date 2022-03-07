@@ -158,10 +158,14 @@ namespace MyWrite
         {
             MessageBox.Show("Версия 1.0. Разработчиком является Лопаткин Сергей (Псевдоним: Hapro Bishop) из группы ИСП-31", "О программе", MessageBoxButton.OK, MessageBoxImage.Information);
         }
-        int line;//Offset от текущей строки
+        int line,//Offset от текущей строки
+            currentChar;
         private void MyText_LayoutUpdated(object sender, EventArgs e)
         {
-            CurrentColumn.Text = MyText.Selection.Start.Paragraph.ContentStart.GetOffsetToPosition(MyText.CaretPosition).ToString();
+            currentChar = MyText.Selection.Start.DocumentStart.GetOffsetToPosition(MyText.CaretPosition) - 1;
+            if (currentChar == -1) currentChar += 2;
+            else if (currentChar == 0) currentChar++;
+            CurrentColumn.Text = currentChar.ToString();
             MyText.CaretPosition.GetLineStartPosition(int.MinValue, out line);
             CurrentRow.Text = (-(line - 1)).ToString();
             if (!MyText.CanUndo) UndoMenu.IsEnabled = false;
