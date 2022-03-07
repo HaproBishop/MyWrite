@@ -168,13 +168,10 @@ namespace MyWrite
         }
         private void Test_Click(object sender, RoutedEventArgs e)
         {
-            CurrentColumn.Text = MyText.CaretPosition.Paragraph.ContentStart.GetOffsetToPosition(MyText.CaretPosition).ToString();            
+            CurrentColumn.Text = MyText.Selection.Start.Paragraph.ContentStart.GetOffsetToPosition(MyText.CaretPosition).ToString();            
             MyText.CaretPosition.GetLineStartPosition(int.MinValue, out int line);
             CurrentRow.Text = (-(line-1)).ToString();
-            int startIndex;
-            
-            MyText.CaretPosition = MyText.CaretPosition.GetPositionAtOffset(-2);
-            CurrentRow.Text = line.ToString();
+            MyText.CaretPosition = MyText.CaretPosition.GetLineStartPosition(1);
         }
     }
 }
