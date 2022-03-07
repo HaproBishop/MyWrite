@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyWrite"
         mc:Ignorable="d"
-        Title="MyWrite" Height="450" MinWidth="700" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip">
+        Title="MyWrite" Height="450" MinWidth="700" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" Loaded="PrimaryWindow_Loaded">
     <Window.InputBindings>
         <KeyBinding Command="ApplicationCommands.Redo" Key="Z" Modifiers="Ctrl+Shift"/>
     </Window.InputBindings>
@@ -36,7 +36,7 @@
                 <MenuItem x:Name="SelectAllMenu" Header="_Выделить все" InputGestureText="Ctrl+A" Command="ApplicationCommands.SelectAll" IsEnabled="False"/>
             </MenuItem>
             <MenuItem Header="_Настойки">
-                <MenuItem x:Name="ShowStatus" Header="Показывать строку _статуса" IsCheckable="True" IsChecked="True"/>
+                <MenuItem x:Name="ShowStatus" Header="Показывать строку _статуса" IsCheckable="True" IsChecked="True" Click="ShowStatus_Click"/>
             </MenuItem>
             <MenuItem Header="Масштаб">
                 <MenuItem Header="Увеличить" InputGestureText="Ctrl + Плюс(+)" Click="ScalePlus_Click"/>
@@ -86,8 +86,8 @@
                 </Canvas>
             </Button>
         </StatusBar>
-        <ScrollViewer>
-            <RichTextBox x:Name="MyText" Margin="0,50,0,50" LayoutUpdated="MyText_LayoutUpdated" AcceptsTab="True" Width="600" Height="800"/>
+        <ScrollViewer HorizontalScrollBarVisibility="Auto">
+            <RichTextBox x:Name="MyText" Margin="0,50,0,50" LayoutUpdated="MyText_LayoutUpdated" SelectionChanged="MyText_SelectionChanged" TextChanged="MyText_TextChanged" AcceptsTab="True" Width="600" Height="800"/>
         </ScrollViewer>
     </DockPanel>
 </Window>

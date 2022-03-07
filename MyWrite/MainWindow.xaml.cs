@@ -58,8 +58,8 @@ namespace MyWrite
         private void DefaultData()
         {
             MyText.Document.Blocks.Clear();
-            Title = _titleChanger.Title;
             _titleChanger.Clear();
+            Title = _titleChanger.Title;
         }
         private void NewWindow_Click(object sender, RoutedEventArgs e)
         {
@@ -71,8 +71,8 @@ namespace MyWrite
             OpenFileDialog open = new OpenFileDialog
             {
                 Title = "Открыть",
-                Filter = "Текстовый документ(.txt) | *.txt",
-                DefaultExt = ".txt",
+                Filter = "Текстовый документ(*.rtf) | *.rtf|Все файлы (*.*) | *.*",
+                DefaultExt = "rtf",
             };
             if (open.ShowDialog() == true)
             {
@@ -83,10 +83,11 @@ namespace MyWrite
                     Title = _titleChanger.FullTitle;
                 }
             }
+            CurrentScale.Text = scale.ScaleY.ToString();
         }
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            if (_titleChanger.FileName == "" || e.Source == SaveAs)
+            if (_titleChanger.FileName == "" || e.Source == SaveAs || e.Source == Create)
             {
                 SaveFileDialog save = new SaveFileDialog
                 {
@@ -94,22 +95,23 @@ namespace MyWrite
                     Filter = "Текстовый документ(*.rtf) | *.rtf|Все файлы (*.*) | *.*",
                     DefaultExt = "rtf",
                 };
-                if(_fileInfo.IsModified)
-                if (save.ShowDialog() == true)
-                {
-                    if (_fileInfo.Save(save.FileName) == true)
+                if (_fileInfo.IsModified)
+                    if (save.ShowDialog() == true)
                     {
-                        _fileInfo.Text = MyText;
-                        _titleChanger.FileName = save.SafeFileName;
-                        Title = _titleChanger.FullTitle;
-                    }                                        
-                }
+                        if (_fileInfo.Save(save.FileName) == true)
+                        {
+                            _fileInfo.Text = MyText;
+                            _titleChanger.FileName = save.SafeFileName;
+                            Title = _titleChanger.FullTitle;
+                        }
+                    }
             }
             else
             {
                 _fileInfo.Save();
                 Title = _titleChanger.FullTitle;
-            }            
+            }
+            CurrentScale.Text = scale.ScaleY.ToString();
         }
         private void PrintText_Click(object sender, RoutedEventArgs e)
         {
@@ -124,26 +126,37 @@ namespace MyWrite
         {
             MyText.Selection.Text.Replace(MyText.Selection.Text, "");
         }
-        int _scale = 100;
+        double _reservedHeight;
+        private void ShowStatus_Click(object sender, RoutedEventArgs e)
+        {
+            if (ShowStatus.IsChecked)
+            {
+                Status.Height = _reservedHeight;
+            }
+            else
+            {
+                _reservedHeight = Status.Height;
+                Status.Height = 0;
+            }
+        }
+        ScaleTransform scale;
         private void DefaultScale_Click(object sender, RoutedEventArgs e)
         {
-            CurrentScale.Text = (_scale = 100).ToString();
-            MyText.LayoutTransform.Value.Scale(1.0, 1.0);
+            CurrentScale.Text = "100";
+            scale.ScaleX = scale.ScaleY = 1.0;
         }
         private void ScaleMinus_Click(object sender, RoutedEventArgs e)
         {
-            if (_scale != 10)
+            if (CurrentScale.Text != "50")
             {
-                CurrentScale.Text = (_scale-=10).ToString();
-                MyText.LayoutTransform.Value.Scale(_scale / 100.0, _scale / 100.0);
+                CurrentScale.Text = ((scale.ScaleY = scale.ScaleX -= 0.1) * 100).ToString();
             }
         }
         private void ScalePlus_Click(object sender, RoutedEventArgs e)
         {
-            if (_scale != 500)
+            if (CurrentScale.Text != "200")
             {
-                CurrentScale.Text = (_scale += 10).ToString();
-                MyText.LayoutTransform.Value.Scale(_scale/100.0, _scale / 100.0);
+                CurrentScale.Text = ((scale.ScaleY = scale.ScaleX += 0.1) * 100).ToString();
             }
         }
         private void HelpMenu_Click(object sender, RoutedEventArgs e)
@@ -159,13 +172,13 @@ namespace MyWrite
             MessageBox.Show("Версия 1.0. Разработчиком является Лопаткин Сергей (Псевдоним: Hapro Bishop) из группы ИСП-31", "О программе", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         int line,//Offset от текущей строки
-            currentChar;
+            currentChar;//Текущее кол-во символов
         private void MyText_LayoutUpdated(object sender, EventArgs e)
         {
             currentChar = MyText.Selection.Start.DocumentStart.GetOffsetToPosition(MyText.CaretPosition) - 1;
-            if (currentChar == -1) currentChar += 2;
-            else if (currentChar == 0) currentChar++;
-            CurrentColumn.Text = currentChar.ToString();
+            if (currentChar == -1) CurrentColumn.Text = (currentChar + 2).ToString();
+            else if (currentChar == 0) CurrentColumn.Text = (currentChar + 1).ToString();
+            else CurrentColumn.Text = currentChar.ToString();
             MyText.CaretPosition.GetLineStartPosition(int.MinValue, out line);
             CurrentRow.Text = (-(line - 1)).ToString();
             if (!MyText.CanUndo) UndoMenu.IsEnabled = false;
@@ -175,6 +188,31 @@ namespace MyWrite
             if (MyText.Document.Blocks.Count == 0) SelectAllMenu.IsEnabled = false;
             else SelectAllMenu.IsEnabled = true;
         }
+        private void MyText_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            if (MyText.Selection.Text.Length == 0)
+            {
+                CutMenu.IsEnabled = CopyMenu.IsEnabled = DelMenu.IsEnabled = false;
+            }
+            else CutMenu.IsEnabled = CopyMenu.IsEnabled = DelMenu.IsEnabled = true;
+        }
+        private void MyText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            PrimaryWindow.Title = _titleChanger.FileChanged();
+            _fileInfo.IsModified = true;
+        }
+        private void PrimaryWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            scale = new ScaleTransform//Кинуть в Activated
+            {
+                ScaleX = 1.0,
+                ScaleY = 1.0
+            };
+            MyText.LayoutTransform = scale;
+            _fileInfo.Text = MyText;
+            _titleChanger.Title = Title;
+        }
+
         private void Goer_Click(object sender, RoutedEventArgs e)
         {
             GoerTo goerToWin = new GoerTo();

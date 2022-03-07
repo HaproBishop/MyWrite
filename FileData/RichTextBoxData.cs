@@ -12,16 +12,7 @@ namespace FileData
 {
     public class RichTextBoxData:FileInfo
     {
-        RichTextBox _text;//Текст в RichTextBox
-        public RichTextBox Text
-        {
-            get => _text;
-            set
-            {
-                _text = value;
-                IsModified = true;
-            }
-        }
+        public RichTextBox Text { get; set; }
         public bool? Save()
         {
             try
