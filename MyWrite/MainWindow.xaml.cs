@@ -172,8 +172,9 @@ namespace MyWrite
             MyText.CaretPosition.GetLineStartPosition(int.MinValue, out int line);
             CurrentRow.Text = (-(line-1)).ToString();
             int startIndex;
-            MyText.CaretPosition = MyText.CaretPosition.GetPositionAtOffset(startIndex = MyText.CaretPosition.Paragraph.ContentStart.GetOffsetToPosition(MyText.CaretPosition.DocumentStart));
-            CurrentRow.Text = startIndex.ToString();
+            
+            MyText.CaretPosition = MyText.CaretPosition.GetPositionAtOffset(-2);
+            CurrentRow.Text = line.ToString();
         }
     }
 }
