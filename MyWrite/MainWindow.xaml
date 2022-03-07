@@ -48,7 +48,7 @@
                 <Separator/>
                 <MenuItem x:Name="AboutProgram" Header="_О программе" Click="AboutProgram_Click"/>
             </MenuItem>
-            <MenuItem x:Name="Test" Header="SOSA MUSIC" Click="Test_Click"/>
+            <MenuItem x:Name="Goer" Header="Переходчик" Click="Goer_Click" ToolTip="Выполняет перевод курсора в указанную позицию или строку"/>
         </Menu>
         <StatusBar x:Name="Status" DockPanel.Dock="Bottom">
             <TextBlock x:Name="CurrentColumn" Text="1"/>

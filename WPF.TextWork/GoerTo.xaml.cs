@@ -17,10 +17,11 @@ namespace WPF.TextWork
     /// <summary>
     /// Логика взаимодействия для GoToLine.xaml
     /// </summary>
-    public partial class GoToLine : Window
-    {        
-        public int LineID { get; private set; }
-        public GoToLine()
+    public partial class GoerTo : Window
+    {
+        public int PosID { get; private set; } = -1;
+        public int LineID { get; private set; } = -1;
+        public GoerTo()
         {
             InitializeComponent();
         }
@@ -29,6 +30,8 @@ namespace WPF.TextWork
             try
             {
                 LineID = Convert.ToInt32(LineValue.Text);
+                DialogResult = true;
+                Close();
             }
             catch
             {
@@ -37,6 +40,27 @@ namespace WPF.TextWork
                 LineValue.Clear();
                 LineValue.Focus();
             }
+        }        
+        private void PosGoer_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                PosID = Convert.ToInt32(PosValue.Text);
+                DialogResult = true;
+                Close();
+            }
+            catch
+            {
+                MessageBox.Show("Некорректно введено значение строки",
+                    "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                PosValue.Clear();
+                PosValue.Focus();
+            }
+        }
+        public void Clear()
+        {
+            PosID = -1;
+            LineID = -1;
         }
     }
     /// <summary>

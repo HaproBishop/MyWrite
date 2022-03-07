@@ -158,8 +158,12 @@ namespace MyWrite
         {
             MessageBox.Show("Версия 1.0. Разработчиком является Лопаткин Сергей (Псевдоним: Hapro Bishop) из группы ИСП-31", "О программе", MessageBoxButton.OK, MessageBoxImage.Information);
         }
+        int line;//Offset от текущей строки
         private void MyText_LayoutUpdated(object sender, EventArgs e)
         {
+            CurrentColumn.Text = MyText.Selection.Start.Paragraph.ContentStart.GetOffsetToPosition(MyText.CaretPosition).ToString();
+            MyText.CaretPosition.GetLineStartPosition(int.MinValue, out line);
+            CurrentRow.Text = (-(line - 1)).ToString();
             if (!MyText.CanUndo) UndoMenu.IsEnabled = false;
             else UndoMenu.IsEnabled = true;
             if (!MyText.CanRedo) RedoMenu.IsEnabled = false;
@@ -167,16 +171,42 @@ namespace MyWrite
             if (MyText.Document.Blocks.Count == 0) SelectAllMenu.IsEnabled = false;
             else SelectAllMenu.IsEnabled = true;
         }
-        private void Test_Click(object sender, RoutedEventArgs e)
+        private void Goer_Click(object sender, RoutedEventArgs e)
         {
-            GoToLine linerWin = new GoToLine();
-            linerWin.ShowDialog();
-            int lineIndex = linerWin.LineID;
-            CurrentColumn.Text = MyText.Selection.Start.Paragraph.ContentStart.GetOffsetToPosition(MyText.CaretPosition).ToString();            
-            MyText.CaretPosition.GetLineStartPosition(int.MinValue, out int line);
-            CurrentRow.Text = (-(line-1)).ToString();
-            var txtReturn = new TextRange(MyText.Document.ContentStart,
-            MyText.Document.ContentEnd).Text;
+            GoerTo goerToWin = new GoerTo();
+            if (goerToWin.ShowDialog() == true)
+            {
+                if (goerToWin.LineID != -1)
+                {
+                    try
+                    {
+                        int lineIndex = goerToWin.LineID - 1;//Задание переходочной строки
+                        MyText.CaretPosition = MyText.Selection.Start.GetLineStartPosition(line);
+                        MyText.CaretPosition = MyText.Selection.Start.GetLineStartPosition(lineIndex);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Указанной строки не найдено!", "Поиск строки",
+                            MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        int posIndex = goerToWin.PosID - 1;//Задание номера позиции, взятого из окна
+                        int charCount = MyText.Selection.Start.DocumentStart.GetOffsetToPosition(MyText.Selection.Start);
+                        MyText.CaretPosition = MyText.Selection.Start.GetPositionAtOffset(-charCount);
+                        MyText.CaretPosition = MyText.Selection.Start.GetPositionAtOffset(posIndex);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Указанной позиции не существует!", "Поиск позиции",
+                            MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }
+            
         }
     }
 }

@@ -48,12 +48,12 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="GoToLine.xaml">
+    <Page Include="GoerTo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Compile Include="GoToLine.xaml.cs">
-      <DependentUpon>GoToLine.xaml</DependentUpon>
+    <Compile Include="GoerTo.xaml.cs">
+      <DependentUpon>GoerTo.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
