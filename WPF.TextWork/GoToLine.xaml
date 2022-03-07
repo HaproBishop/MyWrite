@@ -1,0 +1,16 @@
+﻿<Window x:Class="WPF.TextWork.GoToLine"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF.TextWork"
+        mc:Ignorable="d"
+        Title="Переход к строке" Height="100" Width="300" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" WindowStyle="SingleBorderWindow" ShowInTaskbar="False" SizeToContent="Manual">
+    <DockPanel LastChildFill="False">
+        <DockPanel DockPanel.Dock="Top">
+            <Label Content="Перейти к строке:" FontSize="16"/>
+            <TextBox x:Name="LineValue" Margin="3" BorderBrush="Black" MaxLength="6" FontSize="16" HorizontalContentAlignment="Right"/>
+        </DockPanel>
+        <Button x:Name="LineGoer" Content="Перейти к строке" FontSize="20" DockPanel.Dock="Bottom" IsDefault="True" Click="LineGoer_Click"/>
+    </DockPanel>
+</Window>

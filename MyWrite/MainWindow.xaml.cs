@@ -16,6 +16,7 @@ using FileData;
 using TitleChanger;
 using Commands;
 using Microsoft.Win32;
+using WPF.TextWork;
 
 namespace MyWrite
 {
@@ -168,10 +169,14 @@ namespace MyWrite
         }
         private void Test_Click(object sender, RoutedEventArgs e)
         {
+            GoToLine linerWin = new GoToLine();
+            linerWin.ShowDialog();
+            int lineIndex = linerWin.LineID;
             CurrentColumn.Text = MyText.Selection.Start.Paragraph.ContentStart.GetOffsetToPosition(MyText.CaretPosition).ToString();            
             MyText.CaretPosition.GetLineStartPosition(int.MinValue, out int line);
             CurrentRow.Text = (-(line-1)).ToString();
-            MyText.CaretPosition = MyText.CaretPosition.GetLineStartPosition(1);
+            var txtReturn = new TextRange(MyText.Document.ContentStart,
+            MyText.Document.ContentEnd).Text;
         }
     }
 }
