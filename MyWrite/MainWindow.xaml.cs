@@ -202,7 +202,7 @@ namespace MyWrite
                         int posIndex = goerToWin.PosID - 1;//Задание номера позиции, взятого из окна
                         int charCount = MyText.Selection.Start.DocumentStart.GetOffsetToPosition(MyText.Selection.Start);
                         MyText.CaretPosition = MyText.Selection.Start.GetPositionAtOffset(-charCount);
-                        MyText.CaretPosition = MyText.Selection.Start.GetPositionAtOffset(posIndex);
+                        MyText.CaretPosition = MyText.Selection.Start.GetPositionAtOffset(posIndex);                        
                     }
                     catch
                     {
