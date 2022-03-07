@@ -62,6 +62,11 @@ namespace WPF.TextWork
             PosID = -1;
             LineID = -1;
         }
+
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            PosValue.Focus();
+        }
     }
     /// <summary>
     /// Заготовленный класс для будущей реализации поиска слова в строке

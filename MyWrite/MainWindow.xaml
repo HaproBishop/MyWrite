@@ -52,9 +52,9 @@
         </Menu>
         <StatusBar x:Name="Status" DockPanel.Dock="Bottom">
             <TextBlock x:Name="CurrentColumn" Text="1"/>
-            <TextBlock Text="символов, "/>
+            <TextBlock Text="столбец, "/>
             <TextBlock x:Name="CurrentRow" Text="1"/>
-            <TextBlock Text="строк"/>
+            <TextBlock Text="строка"/>
             <Separator Width="2"/>
             <TextBlock Text="Масштаб:"/>
             <Button x:Name="ScaleMinus" Background="Transparent" BorderBrush="Transparent" Click="ScaleMinus_Click">

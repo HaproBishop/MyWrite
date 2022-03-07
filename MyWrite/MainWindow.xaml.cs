@@ -174,6 +174,7 @@ namespace MyWrite
         private void Goer_Click(object sender, RoutedEventArgs e)
         {
             GoerTo goerToWin = new GoerTo();
+            goerToWin.Owner = this;
             if (goerToWin.ShowDialog() == true)
             {
                 if (goerToWin.LineID != -1)

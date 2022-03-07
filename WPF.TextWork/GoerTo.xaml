@@ -5,25 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF.TextWork"
         mc:Ignorable="d"
-        Title="Переходчик" Height="200" Width="400" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" WindowStyle="SingleBorderWindow" ShowInTaskbar="False" SizeToContent="WidthAndHeight">
-    <TabControl>
+        Title="Переходчик" Height="200" Width="400" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" WindowStyle="SingleBorderWindow" ShowInTaskbar="False" SizeToContent="WidthAndHeight" Activated="Window_Activated">
+    <DockPanel>
+        <Button Width="0" IsCancel="True"/>
+        <TabControl>
         <TabItem Header="Переход к позиции">
             <DockPanel LastChildFill="False">
-                    <DockPanel DockPanel.Dock="Top">
-                        <Label Content="Позиция:" FontSize="16" Margin="25,0,0,0"/>
-                        <TextBox x:Name="PosValue" Margin="75,3,25,3" BorderBrush="Black" MaxLength="6" FontSize="16" HorizontalContentAlignment="Right"/>
-                    </DockPanel>
-                    <Button x:Name="PosGoer" Content="Перейти в позицию" FontSize="20" DockPanel.Dock="Bottom" IsDefault="True" Click="PosGoer_Click"/>
+                <DockPanel DockPanel.Dock="Top">
+                    <Label Content="Позиция:" FontSize="16" Margin="25,0,0,0"/>
+                    <TextBox x:Name="PosValue" Margin="0,3,25,3" BorderBrush="Black" MaxLength="6" FontSize="16" HorizontalContentAlignment="Right"/>
                 </DockPanel>
+                <Button x:Name="PosGoer" Content="Перейти в позицию" FontSize="20" DockPanel.Dock="Bottom" IsDefault="True" Click="PosGoer_Click"/>
+            </DockPanel>
         </TabItem>
         <TabItem Header="Переход к строке">
             <DockPanel LastChildFill="False">
                 <DockPanel DockPanel.Dock="Top">
                     <Label Content="Строка:" FontSize="16" Margin="25,0,0,0"/>
-                    <TextBox x:Name="LineValue" Margin="75,3,25,3" BorderBrush="Black" MaxLength="6" FontSize="16" HorizontalContentAlignment="Right"/>
+                    <TextBox x:Name="LineValue" Margin="0,3,25,3" BorderBrush="Black" MaxLength="6" FontSize="16" HorizontalContentAlignment="Right"/>
                 </DockPanel>
                 <Button x:Name="LineGoer" Content="Перейти к строке" FontSize="20" DockPanel.Dock="Bottom" IsDefault="True" Click="LineGoer_Click"/>
             </DockPanel>
         </TabItem>
     </TabControl>
+    </DockPanel>
 </Window>
