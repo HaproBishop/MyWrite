@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанные со сборкой.
-[assembly: AssemblyTitle("Commands")]
+[assembly: AssemblyTitle("TextCommands")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Commands")]
+[assembly: AssemblyProduct("TextCommands")]
 [assembly: AssemblyCopyright("Copyright ©  2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Следующий GUID служит для идентификации библиотеки типов, если этот проект будет видимым для COM
-[assembly: Guid("84817a43-7a8d-434a-a847-ef998dca8a1d")]
+[assembly: Guid("a582e108-e5eb-4ed3-b77d-acf779531ef6")]
 
 // Сведения о версии сборки состоят из указанных ниже четырех значений:
 //

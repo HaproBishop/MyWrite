@@ -95,13 +95,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Commands\Commands.csproj">
-      <Project>{84817a43-7a8d-434a-a847-ef998dca8a1d}</Project>
-      <Name>Commands</Name>
-    </ProjectReference>
     <ProjectReference Include="..\FileData\FileData.csproj">
       <Project>{099dbeaa-0ee8-4d55-8506-7327a2b2102c}</Project>
       <Name>FileData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TextCommands\TextCommands.csproj">
+      <Project>{a582e108-e5eb-4ed3-b77d-acf779531ef6}</Project>
+      <Name>TextCommands</Name>
     </ProjectReference>
     <ProjectReference Include="..\TitleChanger\TitleChanger.csproj">
       <Project>{2b46a6fd-8097-4681-99ca-8d90daa41629}</Project>
