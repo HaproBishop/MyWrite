@@ -91,9 +91,10 @@ namespace MyWrite
             }
             CurrentScale.Text = (scale.ScaleY * 100).ToString();
         }
+        bool _commandProver;//Используется для идентификации команды в условии
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            if (_titleChanger.FileName == "" || e.Source == SaveAs || e.Source == Create)
+            if (_titleChanger.FileName == "" || e.Source == SaveAs || e.Source == Create || _commandProver)
             {
                 SaveFileDialog save = new SaveFileDialog
                 {
@@ -117,7 +118,13 @@ namespace MyWrite
                 _fileInfo.Save();
                 Title = _titleChanger.FullTitle;
             }
+            _commandProver = false;
             CurrentScale.Text = (scale.ScaleY * 100).ToString();
+        }
+        private void CSaveAs_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            _commandProver = true;
+            Save_Click(sender, e);
         }
         private void PrintText_Click(object sender, RoutedEventArgs e)
         {
@@ -130,7 +137,7 @@ namespace MyWrite
         }
         private void DelMenu_Click(object sender, RoutedEventArgs e)
         {
-            MyText.Selection.Text.Replace(MyText.Selection.Text, "");
+            MyText.Selection.Text = "";
         }
         double _reservedHeight;
         private void ShowStatus_Click(object sender, RoutedEventArgs e)
@@ -221,8 +228,8 @@ namespace MyWrite
             _fileInfo.Text = MyText;
             _titleChanger.Title = Title;
             _altSaveAs.InputGestures.Add(new KeyGesture(Key.S, ModifierKeys.Alt|ModifierKeys.Shift));
-            PrimaryWindow.CommandBindings.Add(new CommandBinding(_altSaveAs, Save_Click));
-        }
+            PrimaryWindow.CommandBindings.Add(new CommandBinding(_altSaveAs, CSaveAs_Executed));
+        }        
         private void Goer_Click(object sender, RoutedEventArgs e)
         {
             GoerTo goerToWin = new GoerTo

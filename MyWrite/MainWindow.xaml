@@ -11,7 +11,7 @@
         <CommandBinding x:Name="CNewWindow" Command="{x:Static local:WinCommands.NewWindow}" Executed="NewWindow_Click"/>
         <CommandBinding x:Name="COpen" Command="ApplicationCommands.Open" Executed="Open_Click"/>
         <CommandBinding x:Name="CSave" Command="ApplicationCommands.Save" Executed="Save_Click"/>
-        <CommandBinding x:Name="CSaveAs" Command="ApplicationCommands.SaveAs" Executed="Save_Click"/>
+        <CommandBinding x:Name="CSaveAs" Command="ApplicationCommands.SaveAs" Executed="CSaveAs_Executed"/>
         <CommandBinding x:Name="CScalePlus" Command="{x:Static local:ScaleCommands.CommandScalePlus}" Executed="ScalePlus_Click"/>
         <CommandBinding x:Name="CScaleMinus" Command="{x:Static local:ScaleCommands.CommandScaleMinus}" Executed="ScaleMinus_Click"/>
         <CommandBinding x:Name="CDefaultScale" Command="{x:Static local:ScaleCommands.CommandScaleDefault}" Executed="DefaultScale_Click"/>
