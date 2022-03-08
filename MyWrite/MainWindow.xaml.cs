@@ -36,9 +36,15 @@ namespace MyWrite
         {
             if (_fileInfo.IsModified)
             {
-                if (PreCloseQuestion() == true)
+                bool yesNo = false;//Yes - true
+                if (PreCloseQuestion(ref yesNo) == true)
                 {
-                    Save_Click(sender, e);
+                    if (yesNo)
+                    {
+                        Save_Click(sender, e);
+                        if (!_fileInfo.IsModified) DefaultData();
+                    }
+                    else DefaultData();
                 }
             }
             else
@@ -46,12 +52,13 @@ namespace MyWrite
                 DefaultData();
             }
         }
-        private bool? PreCloseQuestion()
+        private bool? PreCloseQuestion(ref bool yesNo)
         {
             MessageBoxResult result = MessageBox.Show("Хотите сохранить текущие изменения?",
                 "Сохранение изменений", MessageBoxButton.YesNoCancel,
                     MessageBoxImage.Warning);
-            if (result == MessageBoxResult.Yes) return true;
+            if (result == MessageBoxResult.Yes) return yesNo = true;
+            if (result == MessageBoxResult.No) return true;
             return false;
         }
         private void DefaultData()
@@ -70,7 +77,7 @@ namespace MyWrite
             OpenFileDialog open = new OpenFileDialog
             {
                 Title = "Открыть",
-                Filter = "Текстовый документ(*.rtf) | *.rtf|Все файлы (*.*) | *.*",
+                Filter = "Текстовый документ(*.rtf) | *.rtf |Все файлы (*.*) | *.*",
                 DefaultExt = "rtf",
             };
             if (open.ShowDialog() == true)
@@ -82,16 +89,16 @@ namespace MyWrite
                     Title = _titleChanger.FullTitle;
                 }
             }
-            CurrentScale.Text = scale.ScaleY.ToString();
+            CurrentScale.Text = (scale.ScaleY * 100).ToString();
         }
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            if (_titleChanger.FileName == "" || e.Source == SaveAs || e.Source == Create)
+            if (_titleChanger.FileName == "" || e.Source == SaveAs || e.Source == Create || e.Source == CSaveAs)
             {
                 SaveFileDialog save = new SaveFileDialog
                 {
                     Title = "Сохранить как",
-                    Filter = "Текстовый документ(*.rtf) | *.rtf|Все файлы (*.*) | *.*",
+                    Filter = "Текстовый документ(*.rtf) | *.rtf |Все файлы (*.*) | *.*",
                     DefaultExt = "rtf",
                 };
                 if (_fileInfo.IsModified)
@@ -110,7 +117,7 @@ namespace MyWrite
                 _fileInfo.Save();
                 Title = _titleChanger.FullTitle;
             }
-            CurrentScale.Text = scale.ScaleY.ToString();
+            CurrentScale.Text = (scale.ScaleY * 100).ToString();
         }
         private void PrintText_Click(object sender, RoutedEventArgs e)
         {
@@ -139,10 +146,12 @@ namespace MyWrite
             }
         }
         ScaleTransform scale;
-        private void DefaultScale_Click(object sender, RoutedEventArgs e)
+        private void ScalePlus_Click(object sender, RoutedEventArgs e)
         {
-            CurrentScale.Text = "100";
-            scale.ScaleX = scale.ScaleY = 1.0;
+            if (CurrentScale.Text != "200")
+            {
+                CurrentScale.Text = ((scale.ScaleY = scale.ScaleX += 0.1) * 100).ToString();
+            }
         }
         private void ScaleMinus_Click(object sender, RoutedEventArgs e)
         {
@@ -151,12 +160,10 @@ namespace MyWrite
                 CurrentScale.Text = ((scale.ScaleY = scale.ScaleX -= 0.1) * 100).ToString();
             }
         }
-        private void ScalePlus_Click(object sender, RoutedEventArgs e)
+        private void DefaultScale_Click(object sender, RoutedEventArgs e)
         {
-            if (CurrentScale.Text != "200")
-            {
-                CurrentScale.Text = ((scale.ScaleY = scale.ScaleX += 0.1) * 100).ToString();
-            }
+            CurrentScale.Text = "100";
+            scale.ScaleX = scale.ScaleY = 1.0;
         }
         private void HelpMenu_Click(object sender, RoutedEventArgs e)
         {

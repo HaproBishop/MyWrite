@@ -6,15 +6,16 @@
         xmlns:local="clr-namespace:TextCommands;assembly=TextCommands"
         mc:Ignorable="d"
         Title="MyWrite" Height="450" MinWidth="700" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" Loaded="PrimaryWindow_Loaded">
-    <Window.InputBindings>
-        <KeyBinding Command="ApplicationCommands.Redo" Key="Z">
-            <KeyBinding.Modifiers>
-                <ModifierKeys>Ctrl+Shift</ModifierKeys>
-            </KeyBinding.Modifiers>
-        </KeyBinding>
-    </Window.InputBindings>
     <Window.CommandBindings>
-        <CommandBinding Command="{x:Static local:ScaleCommands.CommandScaleDefault}"/>
+        <CommandBinding x:Name="CCreate" Command="ApplicationCommands.New" Executed="Create_Click"/>
+        <CommandBinding x:Name="COpen" Command="ApplicationCommands.Open" Executed="Open_Click"/>
+        <CommandBinding x:Name="CSave" Command="ApplicationCommands.Save" Executed="Save_Click"/>
+        <CommandBinding x:Name="CSaveAs" Command="ApplicationCommands.SaveAs" Executed="Save_Click"/>
+        <CommandBinding x:Name="CScalePlus" Command="{x:Static local:ScaleCommands.CommandScalePlus}" Executed="ScalePlus_Click"/>
+        <CommandBinding x:Name="CScaleMinus" Command="{x:Static local:ScaleCommands.CommandScaleMinus}" Executed="ScaleMinus_Click"/>
+        <CommandBinding x:Name="CDefaultScale" Command="{x:Static local:ScaleCommands.CommandScaleDefault}" Executed="DefaultScale_Click"/>
+        <CommandBinding x:Name="CHelp" Command="ApplicationCommands.Help" Executed="HelpMenu_Click"/>
+        <CommandBinding x:Name="CPrintText" Command="ApplicationCommands.Print" Executed="PrintText_Click"/>
     </Window.CommandBindings>
     <DockPanel x:Name="DefaultBackground">
         <Menu DockPanel.Dock="Top">

@@ -11,7 +11,7 @@
         /// <summary>
         /// Имя файла
         /// </summary>
-        public string FileName { get; set; }
+        public string FileName { get; set; } = "";
         /// <summary>
         /// Полное имя (имя файла + имя окна)
         /// </summary>
