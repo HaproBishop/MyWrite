@@ -8,6 +8,7 @@
         Title="MyWrite" Height="450" MinWidth="700" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" Loaded="PrimaryWindow_Loaded">
     <Window.CommandBindings>
         <CommandBinding x:Name="CCreate" Command="ApplicationCommands.New" Executed="Create_Click"/>
+        <CommandBinding x:Name="CNewWindow" Command="{x:Static local:WinCommands.NewWindow}" Executed="NewWindow_Click"/>
         <CommandBinding x:Name="COpen" Command="ApplicationCommands.Open" Executed="Open_Click"/>
         <CommandBinding x:Name="CSave" Command="ApplicationCommands.Save" Executed="Save_Click"/>
         <CommandBinding x:Name="CSaveAs" Command="ApplicationCommands.SaveAs" Executed="Save_Click"/>
@@ -21,7 +22,7 @@
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Файл">
                 <MenuItem x:Name="Create" Header="_Создать" Click="Create_Click" InputGestureText="Ctrl+N"/>
-                <MenuItem x:Name="NewWindow" Header="_Новое окно" Click="NewWindow_Click" InputGestureText="Ctrl+Shift+N"/>
+                <MenuItem x:Name="NewWindow" Header="_Новое окно" Click="NewWindow_Click" InputGestureText="Shift+Win+N"/>
                 <MenuItem x:Name="Open" Header="_Открыть" Click="Open_Click" InputGestureText="Ctrl+O"/>
                 <MenuItem x:Name="Save" Header="Со_хранить" Click="Save_Click" InputGestureText="Ctrl+S"/>
                 <MenuItem x:Name="SaveAs" Header="Сохранить _как" Click="Save_Click" InputGestureText="Ctrl+Shift+S"/>
@@ -44,12 +45,12 @@
             <MenuItem Header="_Настойки">
                 <MenuItem x:Name="ShowStatus" Header="Показывать строку _статуса" IsCheckable="True" IsChecked="True" Click="ShowStatus_Click"/>
             </MenuItem>
-            <MenuItem Header="Масштаб">
-                <MenuItem Header="Увеличить" InputGestureText="Ctrl + Плюс(+)" Click="ScalePlus_Click"/>
-                <MenuItem Header="Уменьшить" InputGestureText="Ctrl + Минус(-)" Click="ScaleMinus_Click"/>
-                <MenuItem x:Name="DefaultScale" Header="Восстановить по умолчанию (100%)" Click="DefaultScale_Click" InputGestureText="Ctrl + ()"/>
+            <MenuItem Header="_Масштаб">
+                <MenuItem Header="У_величить" InputGestureText="Alt + Плюс(+)" Click="ScalePlus_Click"/>
+                <MenuItem Header="У_меньшить" InputGestureText="Alt + Минус(-)" Click="ScaleMinus_Click"/>
+                <MenuItem x:Name="DefaultScale" Header="_Восстановить по умолчанию (100%)" Click="DefaultScale_Click" InputGestureText="Alt + ()"/>
             </MenuItem>
-            <MenuItem x:Name="Goer" Header="Переходчик" Click="Goer_Click" ToolTip="Выполняет перевод курсора в указанную позицию или строку"/>
+            <MenuItem x:Name="Goer" Header="_Переходчик" Click="Goer_Click" ToolTip="Выполняет перевод курсора в указанную позицию или строку"/>
             <MenuItem Header="_Справка">
                 <MenuItem x:Name="HelpMenu" Header="Посмотреть _справку" Click="HelpMenu_Click" InputGestureText="F1"/>
                 <Separator/>
