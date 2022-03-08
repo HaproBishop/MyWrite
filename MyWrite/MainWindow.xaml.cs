@@ -93,7 +93,7 @@ namespace MyWrite
         }
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            if (_titleChanger.FileName == "" || e.Source == SaveAs || e.Source == Create || e.Source == CSaveAs)
+            if (_titleChanger.FileName == "" || e.Source == SaveAs || e.Source == Create)
             {
                 SaveFileDialog save = new SaveFileDialog
                 {
@@ -209,6 +209,7 @@ namespace MyWrite
             PrimaryWindow.Title = _titleChanger.FileChanged();
             _fileInfo.IsModified = true;
         }
+        readonly RoutedCommand _altSaveAs = new RoutedCommand();
         private void PrimaryWindow_Loaded(object sender, RoutedEventArgs e)
         {
             scale = new ScaleTransform//Кинуть в Activated
@@ -219,6 +220,8 @@ namespace MyWrite
             MyText.LayoutTransform = scale;
             _fileInfo.Text = MyText;
             _titleChanger.Title = Title;
+            _altSaveAs.InputGestures.Add(new KeyGesture(Key.S, ModifierKeys.Alt|ModifierKeys.Shift));
+            PrimaryWindow.CommandBindings.Add(new CommandBinding(_altSaveAs, Save_Click));
         }
         private void Goer_Click(object sender, RoutedEventArgs e)
         {
@@ -233,6 +236,7 @@ namespace MyWrite
                     try
                     {
                         int lineIndex = goerToWin.LineID - 1;//Задание переходочной строки
+                        MyText.Focus();
                         MyText.CaretPosition = MyText.Selection.Start.GetLineStartPosition(line);
                         MyText.CaretPosition = MyText.Selection.Start.GetLineStartPosition(lineIndex);
                     }
@@ -247,6 +251,7 @@ namespace MyWrite
                     try
                     {
                         int posIndex = goerToWin.PosID - 1;//Задание номера позиции, взятого из окна
+                        MyText.Focus();
                         int charCount = MyText.Selection.Start.DocumentStart.GetOffsetToPosition(MyText.Selection.Start);
                         MyText.CaretPosition = MyText.Selection.Start.GetPositionAtOffset(-charCount);
                         MyText.CaretPosition = MyText.Selection.Start.GetPositionAtOffset(posIndex);                        

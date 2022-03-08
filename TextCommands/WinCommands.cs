@@ -8,7 +8,7 @@ namespace TextCommands
         {
             InputGestureCollection inputNewWindow = new InputGestureCollection()
             {
-                new KeyGesture(Key.N, ModifierKeys.Shift|ModifierKeys.Alt, "Shift+Alt+N")
+                new KeyGesture(Key.N, ModifierKeys.Alt|ModifierKeys.Shift, "Alt+Shift+N")
             };
             NewWindow = new RoutedCommand("NewWindow", typeof(WinCommands), inputNewWindow);
         }
