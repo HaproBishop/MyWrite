@@ -90,6 +90,6 @@
                 </Canvas>
             </Button>
         </StatusBar>
-        <RichTextBox x:Name="MyText" Margin="0,75,0,0" LayoutUpdated="MyText_LayoutUpdated" SelectionChanged="MyText_SelectionChanged" TextChanged="MyText_TextChanged" AcceptsTab="True" BorderThickness="3"/>
+        <RichTextBox x:Name="MyText" LayoutUpdated="MyText_LayoutUpdated" SelectionChanged="MyText_SelectionChanged" TextChanged="MyText_TextChanged" AcceptsTab="True"/>
     </DockPanel>
 </Window>
