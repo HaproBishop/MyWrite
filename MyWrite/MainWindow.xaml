@@ -25,7 +25,7 @@
                 <MenuItem x:Name="NewWindow" Header="_Новое окно" Click="NewWindow_Click" InputGestureText="Alt+Shift+N"/>
                 <MenuItem x:Name="Open" Header="_Открыть" Click="Open_Click" InputGestureText="Ctrl+O"/>
                 <MenuItem x:Name="Save" Header="Со_хранить" Click="Save_Click" InputGestureText="Ctrl+S"/>
-                <MenuItem x:Name="SaveAs" Header="Сохранить _как" Click="Save_Click" InputGestureText="Ctrl+Shift+S"/>
+                <MenuItem x:Name="SaveAs" Header="Сохранить _как" Click="Save_Click" InputGestureText="Alt+Shift+S"/>
                 <Separator/>
                 <MenuItem x:Name="PrintText" Header="_Печать текста" InputGestureText="Ctrl+P" Click="PrintText_Click"/>
                 <Separator/>
