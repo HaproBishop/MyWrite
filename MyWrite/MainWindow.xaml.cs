@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Microsoft.Win32;
 using FileData;
 using TitleChanger;
@@ -24,8 +15,8 @@ namespace MyWrite
     /// </summary>
     public partial class MainWindow : Window
     {
-        RichTextBoxData _fileInfo;
-        AdvancedChanger _titleChanger;
+        readonly RichTextBoxData _fileInfo;
+        readonly AdvancedChanger _titleChanger;
         public MainWindow()
         {
             InitializeComponent();
@@ -179,7 +170,12 @@ namespace MyWrite
                 "2) По умолчанию используется 100% масштаб\n" +
                 "3) Используются стандартные сочетания клавиш для быстрого использования функционала\n" +
                 "4) При использовании переходчика для перехода к позиции, стоит помнить о том," +
-                "что новый абзац дает еще 4 символа в общее количество", "Справка",
+                "что новый абзац дает еще 4 символа в общее количество\n" +
+                "5) Доступна возможность использовать стандартное сочетание (Ctrl+Прокрутка колеса мыши(Вверх/Вниз))" +
+                "для изменения масштаба.\n" +
+                "6) Ввиду проблемы со стандартными сочетаниями Ctrl+Shift и прочие, связанные из-за RichTextBox,\n" +
+                "было принято решение заменить клавиатурные жесты с Ctrl+Shift и Ctrl+плюс на Alt, вместо Ctrl. " +
+                "Для стандартизации, было предпринято решение заменить в логических связках все жесты", "Справка",
                 MessageBoxButton.OK, MessageBoxImage.Information);
         }
         private void AboutProgram_Click(object sender, RoutedEventArgs e)
@@ -245,6 +241,22 @@ namespace MyWrite
                 }
                 else e.Cancel = true;
             }
+        }
+        bool _altIsPressed;
+        private void PrimaryWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.LeftCtrl) _altIsPressed = true; 
+        }
+
+        private void PrimaryWindow_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.LeftCtrl || e.Key == Key.System) _altIsPressed = false;
+        }
+
+        private void PrimaryWindow_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (e.Delta > 0 && _altIsPressed) ScalePlus_Click(sender, e);
+            if (e.Delta < 0 && _altIsPressed) ScaleMinus_Click(sender, e);
         }
 
         private void Goer_Click(object sender, RoutedEventArgs e)

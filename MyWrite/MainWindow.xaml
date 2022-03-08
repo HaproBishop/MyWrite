@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TextCommands;assembly=TextCommands"
         mc:Ignorable="d"
-        Title="MyWrite" Height="450" MinWidth="700" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" Loaded="PrimaryWindow_Loaded" Closing="PrimaryWindow_Closing">
+        Title="MyWrite" Height="450" MinWidth="700" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" Loaded="PrimaryWindow_Loaded" Closing="PrimaryWindow_Closing" KeyDown="PrimaryWindow_KeyDown" KeyUp="PrimaryWindow_KeyUp" MouseWheel="PrimaryWindow_MouseWheel">
     <Window.CommandBindings>
         <CommandBinding x:Name="CCreate" Command="ApplicationCommands.New" Executed="Create_Click"/>
         <CommandBinding x:Name="CNewWindow" Command="{x:Static local:WinCommands.NewWindow}" Executed="NewWindow_Click"/>
