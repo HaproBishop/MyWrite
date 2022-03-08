@@ -164,7 +164,9 @@ namespace MyWrite
             MessageBox.Show("У данной программы существует ряд следующих особенностей:\n" +
                 "1) При изменении настроек окна сохранение происходит для текущего окна и его потомков(ctrl+shift+n)\n" +
                 "2) По умолчанию используется 100% масштаб\n" +
-                "3) Используются стандартные сочетания клавиш для быстрого использования функционала", "Справка",
+                "3) Используются стандартные сочетания клавиш для быстрого использования функционала\n" +
+                "4) При использовании переходчика для перехода к позиции, стоит помнить о том," +
+                "что новый абзац дает еще 4 символа в общее количество", "Справка",
                 MessageBoxButton.OK, MessageBoxImage.Information);
         }
         private void AboutProgram_Click(object sender, RoutedEventArgs e)
@@ -215,8 +217,10 @@ namespace MyWrite
 
         private void Goer_Click(object sender, RoutedEventArgs e)
         {
-            GoerTo goerToWin = new GoerTo();
-            goerToWin.Owner = this;
+            GoerTo goerToWin = new GoerTo
+            {
+                Owner = this
+            };
             if (goerToWin.ShowDialog() == true)
             {
                 if (goerToWin.LineID != -1)
