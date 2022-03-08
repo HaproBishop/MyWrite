@@ -188,7 +188,7 @@ namespace MyWrite
             if (!MyText.CanRedo) RedoMenu.IsEnabled = false;
             else RedoMenu.IsEnabled = true;
             if (MyText.Document.Blocks.Count == 0) SelectAllMenu.IsEnabled = false;
-            else SelectAllMenu.IsEnabled = true;
+            else SelectAllMenu.IsEnabled = true;            
         }
         private void MyText_SelectionChanged(object sender, RoutedEventArgs e)
         {
@@ -214,7 +214,6 @@ namespace MyWrite
             _fileInfo.Text = MyText;
             _titleChanger.Title = Title;
         }
-
         private void Goer_Click(object sender, RoutedEventArgs e)
         {
             GoerTo goerToWin = new GoerTo

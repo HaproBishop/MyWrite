@@ -7,7 +7,11 @@
         mc:Ignorable="d"
         Title="MyWrite" Height="450" MinWidth="700" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" Loaded="PrimaryWindow_Loaded">
     <Window.InputBindings>
-        <KeyBinding Command="ApplicationCommands.Redo" Key="Z" Modifiers="Ctrl+Shift"/>
+        <KeyBinding Command="ApplicationCommands.Redo" Key="Z">
+            <KeyBinding.Modifiers>
+                <ModifierKeys>Ctrl+Shift</ModifierKeys>
+            </KeyBinding.Modifiers>
+        </KeyBinding>
     </Window.InputBindings>
     <Window.CommandBindings>
     </Window.CommandBindings>
@@ -50,6 +54,15 @@
                 <MenuItem x:Name="AboutProgram" Header="_О программе" Click="AboutProgram_Click"/>
             </MenuItem>
         </Menu>
+        <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar>
+                <Calendar/>
+            </ToolBar>
+            <ToolBar>
+                <Calendar ToolBar.OverflowMode="Always"/>
+                
+            </ToolBar>
+        </ToolBarTray>
         <StatusBar x:Name="Status" DockPanel.Dock="Bottom">
             <TextBlock x:Name="CurrentColumn" Text="1"/>
             <TextBlock Text="символ, "/>
@@ -86,8 +99,6 @@
                 </Canvas>
             </Button>
         </StatusBar>
-        <ScrollViewer HorizontalScrollBarVisibility="Auto">
-            <RichTextBox x:Name="MyText" Margin="0,50,0,50" LayoutUpdated="MyText_LayoutUpdated" SelectionChanged="MyText_SelectionChanged" TextChanged="MyText_TextChanged" AcceptsTab="True" Width="600" Height="800"/>
-        </ScrollViewer>
+        <RichTextBox x:Name="MyText" Margin="0,75,0,0" LayoutUpdated="MyText_LayoutUpdated" SelectionChanged="MyText_SelectionChanged" TextChanged="MyText_TextChanged" AcceptsTab="True" BorderThickness="3"/>
     </DockPanel>
 </Window>
