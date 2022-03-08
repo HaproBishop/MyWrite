@@ -5,13 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TextCommands;assembly=TextCommands"
         mc:Ignorable="d"
-        Title="MyWrite" Height="450" MinWidth="700" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" Loaded="PrimaryWindow_Loaded">
+        Title="MyWrite" Height="450" MinWidth="700" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" Loaded="PrimaryWindow_Loaded" Closing="PrimaryWindow_Closing">
     <Window.CommandBindings>
         <CommandBinding x:Name="CCreate" Command="ApplicationCommands.New" Executed="Create_Click"/>
         <CommandBinding x:Name="CNewWindow" Command="{x:Static local:WinCommands.NewWindow}" Executed="NewWindow_Click"/>
         <CommandBinding x:Name="COpen" Command="ApplicationCommands.Open" Executed="Open_Click"/>
         <CommandBinding x:Name="CSave" Command="ApplicationCommands.Save" Executed="Save_Click"/>
-        <CommandBinding x:Name="CSaveAs" Command="ApplicationCommands.SaveAs" Executed="CSaveAs_Executed"/>
         <CommandBinding x:Name="CScalePlus" Command="{x:Static local:ScaleCommands.CommandScalePlus}" Executed="ScalePlus_Click"/>
         <CommandBinding x:Name="CScaleMinus" Command="{x:Static local:ScaleCommands.CommandScaleMinus}" Executed="ScaleMinus_Click"/>
         <CommandBinding x:Name="CDefaultScale" Command="{x:Static local:ScaleCommands.CommandScaleDefault}" Executed="DefaultScale_Click"/>

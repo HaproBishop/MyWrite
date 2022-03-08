@@ -229,7 +229,24 @@ namespace MyWrite
             _titleChanger.Title = Title;
             _altSaveAs.InputGestures.Add(new KeyGesture(Key.S, ModifierKeys.Alt|ModifierKeys.Shift));
             PrimaryWindow.CommandBindings.Add(new CommandBinding(_altSaveAs, CSaveAs_Executed));
-        }        
+        }
+
+        private void PrimaryWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (_fileInfo.IsModified)
+            {
+                bool yesNo = false;//Yes - true
+                if (PreCloseQuestion(ref yesNo) == true)
+                {
+                    if (yesNo)
+                    {
+                        Save_Click(sender, new RoutedEventArgs());
+                    }
+                }
+                else e.Cancel = true;
+            }
+        }
+
         private void Goer_Click(object sender, RoutedEventArgs e)
         {
             GoerTo goerToWin = new GoerTo
