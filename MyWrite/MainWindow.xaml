@@ -54,15 +54,6 @@
                 <MenuItem x:Name="AboutProgram" Header="_О программе" Click="AboutProgram_Click"/>
             </MenuItem>
         </Menu>
-        <ToolBarTray DockPanel.Dock="Top">
-            <ToolBar>
-                <Calendar/>
-            </ToolBar>
-            <ToolBar>
-                <Calendar ToolBar.OverflowMode="Always"/>
-                
-            </ToolBar>
-        </ToolBarTray>
         <StatusBar x:Name="Status" DockPanel.Dock="Bottom">
             <TextBlock x:Name="CurrentColumn" Text="1"/>
             <TextBlock Text="символ, "/>
