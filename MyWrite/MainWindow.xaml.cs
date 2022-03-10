@@ -68,7 +68,7 @@ namespace MyWrite
             OpenFileDialog open = new OpenFileDialog
             {
                 Title = "Открыть",
-                Filter = "Текстовый документ(*.rtf) | *.rtf |Все файлы (*.*) | *.*",
+                Filter = "Текстовый документ(*.rtf)|*.rtf|Все файлы (*.*) |*.*",
                 DefaultExt = "rtf",
             };
             if (open.ShowDialog() == true)
@@ -90,7 +90,7 @@ namespace MyWrite
                 SaveFileDialog save = new SaveFileDialog
                 {
                     Title = "Сохранить как",
-                    Filter = "Текстовый документ(*.rtf) | *.rtf |Все файлы (*.*) | *.*",
+                    Filter = "Текстовый документ(*.rtf)|*.rtf|Все файлы (*.*) |*.*",
                     DefaultExt = "rtf",
                 };
                 if (_fileInfo.IsModified)
