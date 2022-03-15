@@ -7,7 +7,6 @@ using Microsoft.Win32;
 using FileData;
 using TitleChanger;
 using WPF.TextWork;
-using System.Collections.Generic;
 
 namespace MyWrite
 {
