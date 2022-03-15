@@ -7,6 +7,7 @@ using Microsoft.Win32;
 using FileData;
 using TitleChanger;
 using WPF.TextWork;
+using System.Collections.Generic;
 
 namespace MyWrite
 {
@@ -23,7 +24,7 @@ namespace MyWrite
             _titleChanger = new AdvancedChanger(Title);
             _fileInfo = new RichTextBoxData();
         }
-        private void Create_Click(object sender, RoutedEventArgs e)
+    private void Create_Click(object sender, RoutedEventArgs e)
         {
             if (_fileInfo.IsModified)
             {
@@ -85,7 +86,7 @@ namespace MyWrite
         bool _commandProver;//Используется для идентификации команды в условии
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            if (_titleChanger.FileName == "" || e.Source == SaveAs || e.Source == Create || _commandProver)
+            if (_titleChanger.FileName == "" || e.Source == SaveAs || e.Source == SaveAsTB || e.Source == Create || _commandProver)
             {
                 SaveFileDialog save = new SaveFileDialog
                 {
@@ -125,10 +126,6 @@ namespace MyWrite
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             Close();
-        }
-        private void DelMenu_Click(object sender, RoutedEventArgs e)
-        {
-            MyText.Selection.Text = "";
         }
         double _reservedHeight;
         private void ShowStatus_Click(object sender, RoutedEventArgs e)
@@ -192,10 +189,7 @@ namespace MyWrite
             else CurrentColumn.Text = currentChar.ToString();
             MyText.CaretPosition.GetLineStartPosition(int.MinValue, out line);
             CurrentRow.Text = (-(line - 1)).ToString();
-            if (!MyText.CanUndo) UndoMenu.IsEnabled = false;
-            else UndoMenu.IsEnabled = true;
-            if (!MyText.CanRedo) RedoMenu.IsEnabled = false;
-            else RedoMenu.IsEnabled = true;
+            CurrentSize.Text = MyText.Selection.Start.Paragraph.FontSize.ToString();
             if (MyText.Document.Blocks.Count == 0) SelectAllMenu.IsEnabled = false;
             else SelectAllMenu.IsEnabled = true;            
         }
@@ -203,9 +197,9 @@ namespace MyWrite
         {
             if (MyText.Selection.Text.Length == 0)
             {
-                CutMenu.IsEnabled = CopyMenu.IsEnabled = DelMenu.IsEnabled = false;
+                DelMenu.IsEnabled = false;
             }
-            else CutMenu.IsEnabled = CopyMenu.IsEnabled = DelMenu.IsEnabled = true;
+            else DelMenu.IsEnabled = true;
         }
         private void MyText_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -257,6 +251,15 @@ namespace MyWrite
         {
             if (e.Delta > 0 && _altIsPressed) ScalePlus_Click(sender, e);
             if (e.Delta < 0 && _altIsPressed) ScaleMinus_Click(sender, e);
+        }
+        bool _firstTry;
+        private void CurrentFont_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_firstTry)
+            {
+                MyText.Selection.Start.Paragraph.FontFamily = new FontFamily(CurrentFont.Text);
+            }
+            _firstTry = true;
         }
 
         private void Goer_Click(object sender, RoutedEventArgs e)

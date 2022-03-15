@@ -8,12 +8,13 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>MyWrite</RootNamespace>
     <AssemblyName>MyWrite</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,6 +34,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>LogoIco.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -111,6 +115,33 @@
       <Project>{e801b27b-e8aa-4505-9caa-5c7bf5a39079}</Project>
       <Name>WPF.TextWork</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Redo.ico" />
+    <Resource Include="Pictures\Clear.ico" />
+    <Resource Include="Pictures\LoadFrom.ico" />
+    <Resource Include="Pictures\Support.ico" />
+    <Resource Include="Pictures\Undo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Create.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\CenterAlignment.png" />
+    <Resource Include="Pictures\Copy.png" />
+    <Resource Include="Pictures\Cut.png" />
+    <Resource Include="Pictures\EmptyList.png" />
+    <Resource Include="Pictures\Insert.png" />
+    <Resource Include="Pictures\LeftAlignment.png" />
+    <Resource Include="Pictures\NewWin.png" />
+    <Resource Include="Pictures\Print.png" />
+    <Resource Include="Pictures\RightAlignment.png" />
+    <Resource Include="Pictures\Save.png" />
+    <Resource Include="Pictures\SaveAs.png" />
+    <Resource Include="Pictures\StretchAlignment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="LogoIco.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

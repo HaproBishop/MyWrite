@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TextCommands;assembly=TextCommands"
         mc:Ignorable="d"
-        Title="MyWrite" Height="450" MinWidth="700" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" Loaded="PrimaryWindow_Loaded" Closing="PrimaryWindow_Closing" KeyDown="PrimaryWindow_KeyDown" KeyUp="PrimaryWindow_KeyUp" MouseWheel="PrimaryWindow_MouseWheel">
+        Title="MyWrite" Icon="LogoIco.ico" MinHeight="200" Height="450" MinWidth="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" Loaded="PrimaryWindow_Loaded" Closing="PrimaryWindow_Closing" KeyDown="PrimaryWindow_KeyDown" KeyUp="PrimaryWindow_KeyUp" MouseWheel="PrimaryWindow_MouseWheel">
     <Window.CommandBindings>
         <CommandBinding x:Name="CCreate" Command="ApplicationCommands.New" Executed="Create_Click"/>
         <CommandBinding x:Name="CNewWindow" Command="{x:Static local:WinCommands.NewWindow}" Executed="NewWindow_Click"/>
@@ -19,43 +19,125 @@
     </Window.CommandBindings>
     <DockPanel x:Name="DefaultBackground">
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="_Файл">
-                <MenuItem x:Name="Create" Header="_Создать" Click="Create_Click" InputGestureText="Ctrl+N"/>
-                <MenuItem x:Name="NewWindow" Header="_Новое окно" Click="NewWindow_Click" InputGestureText="Alt+Shift+N"/>
-                <MenuItem x:Name="Open" Header="_Открыть" Click="Open_Click" InputGestureText="Ctrl+O"/>
-                <MenuItem x:Name="Save" Header="Со_хранить" Click="Save_Click" InputGestureText="Ctrl+S"/>
-                <MenuItem x:Name="SaveAs" Header="Сохранить _как" Click="Save_Click" InputGestureText="Alt+Shift+S"/>
+            <MenuItem Header="_Файл" FontSize="12">
+                <MenuItem x:Name="Create" Header="_Создать" Click="Create_Click" InputGestureText="Ctrl+N" FontSize="12"/>
+                <MenuItem x:Name="NewWindow" Header="_Новое окно" Click="NewWindow_Click" InputGestureText="Alt+Shift+N" FontSize="12"/>
+                <MenuItem x:Name="Open" Header="_Открыть" Click="Open_Click" InputGestureText="Ctrl+O" FontSize="12"/>
+                <MenuItem x:Name="Save" Header="Со_хранить" Click="Save_Click" InputGestureText="Ctrl+S" FontSize="12"/>
+                <MenuItem x:Name="SaveAs" Header="Сохранить _как" Click="Save_Click" InputGestureText="Alt+Shift+S" FontSize="12"/>
                 <Separator/>
-                <MenuItem x:Name="PrintText" Header="_Печать текста" InputGestureText="Ctrl+P" Click="PrintText_Click"/>
+                <MenuItem x:Name="PrintText" Header="_Печать текста" InputGestureText="Ctrl+P" Click="PrintText_Click" FontSize="12"/>
                 <Separator/>
-                <MenuItem x:Name="Exit" Header="_Выход" InputGestureText="Alt+F4" Click="Exit_Click"/>
+                <MenuItem x:Name="Exit" Header="_Выход" InputGestureText="Alt+F4" Click="Exit_Click" FontSize="12"/>
             </MenuItem>
             <MenuItem Header="_Изменить">
-                <MenuItem x:Name="UndoMenu" Header="_Отменить" InputGestureText="Ctrl+Z" Command="ApplicationCommands.Undo" IsEnabled="False"/>
-                <MenuItem x:Name="RedoMenu" Header="_Вернуть" InputGestureText="Ctrl+Y" Command="ApplicationCommands.Redo" IsEnabled="False"/>
+                <MenuItem x:Name="UndoMenu" Header="_Отменить" InputGestureText="Ctrl+Z" Command="ApplicationCommands.Undo" FontSize="12"/>
+                <MenuItem x:Name="RedoMenu" Header="_Вернуть" InputGestureText="Ctrl+Y" Command="ApplicationCommands.Redo" FontSize="12"/>
                 <Separator/>
-                <MenuItem x:Name="CutMenu" Header="Вы_резать" Command="ApplicationCommands.Cut" InputGestureText="Ctrl+X" IsEnabled="False"/>
-                <MenuItem x:Name="CopyMenu" Header="_Копировать" Command="ApplicationCommands.Copy" InputGestureText="Ctrl+C" IsEnabled="False"/>
-                <MenuItem x:Name="PasteMenu" Header="В_ставить" Command="ApplicationCommands.Paste" InputGestureText="Ctrl+V" IsEnabled="False"/>
-                <MenuItem x:Name="DelMenu" Header="_Удалить" Click="DelMenu_Click" InputGestureText="Del" IsEnabled="False"/>
+                <MenuItem x:Name="CutMenu" Header="Вы_резать" Command="ApplicationCommands.Cut" InputGestureText="Ctrl+X" FontSize="12"/>
+                <MenuItem x:Name="CopyMenu" Header="_Копировать" Command="ApplicationCommands.Copy" InputGestureText="Ctrl+C" FontSize="12"/>
+                <MenuItem x:Name="PasteMenu" Header="В_ставить" Command="ApplicationCommands.Paste" InputGestureText="Ctrl+V" FontSize="12"/>
+                <MenuItem x:Name="DelMenu" Header="_Удалить" Command="EditingCommands.Delete" InputGestureText="Del" FontSize="12"/>
                 <Separator/>
-                <MenuItem x:Name="SelectAllMenu" Header="_Выделить все" InputGestureText="Ctrl+A" Command="ApplicationCommands.SelectAll" IsEnabled="False"/>
+                <MenuItem x:Name="SelectAllMenu" Header="_Выделить все" InputGestureText="Ctrl+A" Command="ApplicationCommands.SelectAll" FontSize="12"/>
             </MenuItem>
             <MenuItem Header="_Настойки">
-                <MenuItem Header="_Масштаб">
-                    <MenuItem Header="У_величить" InputGestureText="Alt + Плюс(+)" Click="ScalePlus_Click"/>
-                    <MenuItem Header="У_меньшить" InputGestureText="Alt + Минус(-)" Click="ScaleMinus_Click"/>
-                    <MenuItem x:Name="DefaultScale" Header="_Восстановить по умолчанию (100%)" Click="DefaultScale_Click" InputGestureText="Alt + ()"/>
+                <MenuItem Header="_Масштаб" FontSize="12">
+                    <MenuItem Header="У_величить" InputGestureText="Alt + Плюс(+)" Click="ScalePlus_Click" FontSize="12"/>
+                    <MenuItem Header="У_меньшить" InputGestureText="Alt + Минус(-)" Click="ScaleMinus_Click" FontSize="12"/>
+                    <MenuItem x:Name="DefaultScale" Header="_Восстановить по умолчанию (100%)" Click="DefaultScale_Click" InputGestureText="Alt + ()" FontSize="12"/>
                 </MenuItem>
-                <MenuItem x:Name="ShowStatus" Header="Показывать строку _статуса" IsCheckable="True" IsChecked="True" Click="ShowStatus_Click"/>
+                <MenuItem Header="Выравнивание">
+                    <MenuItem x:Name="SetLeftAlignment" Header="Выравнивание по левой стороне" Command="EditingCommands.AlignLeft"/>
+                    <MenuItem x:Name="SetCenterAlignment" Header="Выравнивание по центру" Command="EditingCommands.AlignCenter"/>
+                    <MenuItem x:Name="SetRightAlignment" Header="Выравнивание по правой стороне" Command="EditingCommands.AlignRight"/>
+                    <MenuItem x:Name="SetStretchAlignment" Header="Выравнивание по ширине" Command="EditingCommands.AlignJustify"/>
+                </MenuItem>
+                <MenuItem x:Name="ShowStatus" Header="Показывать строку _статуса" IsCheckable="True" IsChecked="True" Click="ShowStatus_Click" FontSize="12"/>
             </MenuItem>
-            <MenuItem x:Name="Goer" Header="_Переходчик" Click="Goer_Click" ToolTip="Выполняет перевод курсора в указанную позицию или строку"/>
-            <MenuItem Header="_Справка">
-                <MenuItem x:Name="HelpMenu" Header="Посмотреть _справку" Click="HelpMenu_Click" InputGestureText="F1"/>
+            <MenuItem x:Name="Goer" Header="_Переходчик" Click="Goer_Click" ToolTip="Выполняет перевод курсора в указанную позицию или строку" FontSize="12"/>
+            <MenuItem Header="_Справка" FontSize="12">
+                <MenuItem x:Name="HelpMenu" Header="Посмотреть _справку" Click="HelpMenu_Click" InputGestureText="F1" FontSize="12"/>
                 <Separator/>
-                <MenuItem x:Name="AboutProgram" Header="_О программе" Click="AboutProgram_Click"/>
+                <MenuItem x:Name="AboutProgram" Header="_О программе" Click="AboutProgram_Click" FontSize="12"/>
             </MenuItem>
         </Menu>
+        <ToolBar DockPanel.Dock="Top" Height="40">
+                <Button ToolTip="Позволяет создать новый текстовый документ" Click="Create_Click">
+                    <Image Source="Pictures\Create.png"/>
+                </Button>
+            <Button ToolTip="Новое окно" Click="NewWindow_Click">
+                <Image Source="Pictures\NewWin.png"/>
+            </Button>
+            <Button ToolTip="Выполняет загрузку документа из файла" Click="Open_Click">
+                    <Image Source="Pictures\LoadFrom.ico"/>
+                </Button>
+            <ToolBar>
+                <Button ToolTip="Выполняет сохранение документа" Click="Save_Click">
+                    <Image Source="Pictures\Save.png"/>
+                </Button>
+                <Button x:Name="SaveAsTB" ToolTip="Выполняет сохранение документа в новый файл" Click="Save_Click" ToolBar.OverflowMode="Always">
+                    <DockPanel Height="30">
+                        <Image Source="Pictures\SaveAs.png"/>
+                        <TextBlock Text="Сохранить как" FontSize="12"/>
+                    </DockPanel>
+                </Button>
+            </ToolBar>
+                <Separator/>
+                <Button ToolTip="Выполняет печать на бумагу" Click="PrintText_Click">
+                    <Image Source="Pictures\Print.png"/>
+                </Button>
+            <Separator/>
+            <Button ToolTip="Вырезать" Command="ApplicationCommands.Cut">
+                <Image Source="Pictures\Cut.png"/>
+            </Button>
+            <Button ToolTip="Копировать" Command="ApplicationCommands.Copy">
+                <Image Source="Pictures\Copy.png"/>
+            </Button>
+            <Button ToolTip="Вставить"  Command="ApplicationCommands.Paste">
+                <Image Source="Pictures\Insert.png"/>
+            </Button>
+            <Separator/>
+            <Button ToolTip="Отменить" Command="ApplicationCommands.Undo">
+                <Image Source="Pictures\Undo.ico"/>
+            </Button>
+            <Button ToolTip="Вернуть" Command="ApplicationCommands.Redo">
+                <Image Source="Pictures\Redo.ico"/>
+            </Button>
+            <Separator/>
+            <Button x:Name="SizeLess" ToolTip="Уменьшить размер шрифта" FontWeight="Bold" Content="-" FontSize="12" Command="EditingCommands.DecreaseFontSize"/>
+            <TextBox x:Name="CurrentSize" Text="12"/>
+            <Button ToolTip="Увеличить размер шрифта" FontWeight="Bold" Content="+" FontSize="12" Command="EditingCommands.IncreaseFontSize"/>
+            <Separator/>
+            <ToggleButton Content="B" FontWeight="Bold" FontSize="12" Command="EditingCommands.ToggleBold"/>
+            <ToggleButton Content="K" FontStyle="Italic" FontSize="12" Command="EditingCommands.ToggleItalic"/>
+            <ToggleButton Command="EditingCommands.ToggleUnderline">
+                <TextBlock>
+                    <Underline FontSize="12">Ч</Underline>
+                </TextBlock>
+            </ToggleButton>
+            <Separator/>
+            <ComboBox x:Name="CurrentFont" ItemsSource="{Binding Source={x:Static Member=Fonts.SystemFontFamilies}}" SelectedIndex="50" SelectionChanged="CurrentFont_SelectionChanged">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock FontFamily="{Binding .}" FontSize="12" Text="{Binding Source}" Margin="0,0,10,0"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Separator/>
+            <Button ToolTip="Выравнивает по левой стороне" Height="30" Command="EditingCommands.AlignLeft">
+                <Image Source="Pictures\LeftAlignment.png"/>
+            </Button>
+            <Button ToolTip="Выравнивает по центру" Height="30" Command="EditingCommands.AlignCenter">
+                <Image Source="Pictures\CenterAlignment.png"/>
+            </Button>
+            <Button ToolTip="Выравнивает по правой стороне" Height="30" Command="EditingCommands.AlignRight">
+                <Image Source="Pictures\RightAlignment.png"/>
+            </Button>
+            <Button ToolTip="Выравнивает по ширине" Height="30" Command="EditingCommands.AlignJustify">
+                <Image Source="Pictures\StretchAlignment.png"/>
+            </Button>
+        </ToolBar>
         <StatusBar x:Name="Status" DockPanel.Dock="Bottom">
             <TextBlock x:Name="CurrentColumn" Text="1"/>
             <TextBlock Text="символ, "/>
@@ -92,6 +174,6 @@
                 </Canvas>
             </Button>
         </StatusBar>
-        <RichTextBox x:Name="MyText" LayoutUpdated="MyText_LayoutUpdated" SelectionChanged="MyText_SelectionChanged" TextChanged="MyText_TextChanged" AcceptsTab="True"/>
+        <RichTextBox x:Name="MyText" LayoutUpdated="MyText_LayoutUpdated" SelectionChanged="MyText_SelectionChanged" TextChanged="MyText_TextChanged" AcceptsTab="True" VerticalScrollBarVisibility="Visible"/>
     </DockPanel>
 </Window>
