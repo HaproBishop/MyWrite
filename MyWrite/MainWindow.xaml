@@ -105,17 +105,16 @@
                 <Image Source="Pictures\Redo.ico"/>
             </Button>
             <Separator/>
-            <Button x:Name="SizeLess" ToolTip="Уменьшить размер шрифта" FontWeight="Bold" Content="-" FontSize="12" Command="EditingCommands.DecreaseFontSize"/>
-            <TextBox x:Name="CurrentSize" Text="12"/>
-            <Button ToolTip="Увеличить размер шрифта" FontWeight="Bold" Content="+" FontSize="12" Command="EditingCommands.IncreaseFontSize"/>
+            <Button x:Name="SizeLess" ToolTip="Уменьшить размер шрифта" FontWeight="Bold" Content="-А" FontSize="12" Command="EditingCommands.DecreaseFontSize"/>
+            <Button ToolTip="Увеличить размер шрифта" FontWeight="Bold" Content="+А" FontSize="12" Command="EditingCommands.IncreaseFontSize"/>
             <Separator/>
-            <ToggleButton Content="B" FontWeight="Bold" FontSize="12" Command="EditingCommands.ToggleBold"/>
-            <ToggleButton Content="K" FontStyle="Italic" FontSize="12" Command="EditingCommands.ToggleItalic"/>
-            <ToggleButton Command="EditingCommands.ToggleUnderline">
+            <Button Content="Ж" FontWeight="Bold" FontSize="12" Command="EditingCommands.ToggleBold"/>
+            <Button Content="K" FontStyle="Italic" FontSize="12" Command="EditingCommands.ToggleItalic"/>
+            <Button Command="EditingCommands.ToggleUnderline">
                 <TextBlock>
                     <Underline FontSize="12">Ч</Underline>
                 </TextBlock>
-            </ToggleButton>
+            </Button>
             <Separator/>
             <ComboBox x:Name="CurrentFont" ItemsSource="{Binding Source={x:Static Member=Fonts.SystemFontFamilies}}" SelectedIndex="50" SelectionChanged="CurrentFont_SelectionChanged">
                 <ComboBox.ItemTemplate>
@@ -137,6 +136,23 @@
             <Button ToolTip="Выравнивает по ширине" Height="30" Command="EditingCommands.AlignJustify">
                 <Image Source="Pictures\StretchAlignment.png"/>
             </Button>
+            <Button x:Name="BulletsSwitch" Background="Transparent" BorderBrush="Transparent" Command="EditingCommands.ToggleBullets" Margin="3,3,3,3">
+                <Canvas Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Path Stroke="Black"/>
+                    <Path>
+                        <Path.Data>
+                            <EllipseGeometry Center="7.5,7.5" RadiusX="7.5" RadiusY="7.5"/>
+                        </Path.Data>
+                        <Path.Stroke>
+                            <SolidColorBrush Color="Black"/>
+                        </Path.Stroke>
+                        <Path.Fill>
+                            <SolidColorBrush Color="Black"/>
+                        </Path.Fill>
+                    </Path>
+                </Canvas>
+            </Button>
+            <Button Content="1." x:Name="NumberingSwitch" BorderBrush="Black" Command="EditingCommands.ToggleNumbering" Margin="3,3,3,3"/>
         </ToolBar>
         <StatusBar x:Name="Status" DockPanel.Dock="Bottom">
             <TextBlock x:Name="CurrentColumn" Text="1"/>

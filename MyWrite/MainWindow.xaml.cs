@@ -188,7 +188,6 @@ namespace MyWrite
             else CurrentColumn.Text = currentChar.ToString();
             MyText.CaretPosition.GetLineStartPosition(int.MinValue, out line);
             CurrentRow.Text = (-(line - 1)).ToString();
-            CurrentSize.Text = MyText.Selection.Start.Paragraph.FontSize.ToString();
             if (MyText.Document.Blocks.Count == 0) SelectAllMenu.IsEnabled = false;
             else SelectAllMenu.IsEnabled = true;            
         }
