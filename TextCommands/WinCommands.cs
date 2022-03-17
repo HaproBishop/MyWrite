@@ -1,7 +1,9 @@
 ﻿using System.Windows.Input;
 
 namespace TextCommands
-{
+{/// <summary>
+/// Статический класс оконных команд
+/// </summary>
     public class WinCommands
     {
         static WinCommands()
@@ -12,6 +14,6 @@ namespace TextCommands
             };
             NewWindow = new RoutedCommand("NewWindow", typeof(WinCommands), inputNewWindow);
         }
-        public static RoutedCommand NewWindow { get; set; }
+        public static RoutedCommand NewWindow { get; set; }//Команда для создания экземпляра окна
     }
 }

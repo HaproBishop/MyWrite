@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TextCommands;assembly=TextCommands"
         mc:Ignorable="d"
-        Title="MyWrite" Icon="LogoIco.ico" MinHeight="200" Height="450" MinWidth="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" Loaded="PrimaryWindow_Loaded" Closing="PrimaryWindow_Closing" KeyDown="PrimaryWindow_KeyDown" KeyUp="PrimaryWindow_KeyUp" MouseWheel="PrimaryWindow_MouseWheel">
+        Title="MyWrite" Icon="LogoIco.ico" MinHeight="200" Height="450" MinWidth="800" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" Loaded="PrimaryWindow_Loaded" Closing="PrimaryWindow_Closing" KeyDown="PrimaryWindow_KeyDown" KeyUp="PrimaryWindow_KeyUp" MouseWheel="PrimaryWindow_MouseWheel">
     <Window.CommandBindings>
         <CommandBinding x:Name="CCreate" Command="ApplicationCommands.New" Executed="Create_Click"/>
         <CommandBinding x:Name="CNewWindow" Command="{x:Static local:WinCommands.NewWindow}" Executed="NewWindow_Click"/>
@@ -116,7 +116,7 @@
                 </TextBlock>
             </Button>
             <Separator/>
-            <ComboBox x:Name="CurrentFont" ItemsSource="{Binding Source={x:Static Member=Fonts.SystemFontFamilies}}" SelectedIndex="50" SelectionChanged="CurrentFont_SelectionChanged">
+            <ComboBox x:Name="CurrentFont" ItemsSource="{Binding Source={x:Static Member=Fonts.SystemFontFamilies}}" SelectedIndex="47" SelectionChanged="CurrentFont_SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock FontFamily="{Binding .}" FontSize="12" Text="{Binding Source}" Margin="0,0,10,0"/>

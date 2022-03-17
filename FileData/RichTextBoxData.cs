@@ -4,10 +4,16 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 
 namespace FileData
-{
+{/// <summary>
+/// Потомок FileInfo, который используется для работы с RichTextBox от WPF
+/// </summary>
     public class RichTextBoxData:FileInfo
     {
-        public RichTextBox Text { get; set; }
+        public RichTextBox Text { get; set; }//Свойство для синхронизации текста
+        /// <summary>
+        /// Сохранение файла
+        /// </summary>        
+        /// <returns>true, если успешно сохранен или false, если не успешно</returns>
         public bool? Save()
         {
             try
@@ -24,12 +30,19 @@ namespace FileData
             {
                 return false;
             }
-        }
+        }/// <summary>
+         /// Сохранение файла
+         /// </summary>
+         /// <param name="path">Путь к файлу</param>
+         /// <returns>true, если успешно сохранен или false, если не успешно</returns>
         public bool? Save(string path)
         {
             Path = path;
             return Save();
-        }
+        }/// <summary>
+        /// Открытие файла
+        /// </summary>
+        /// <returns>true, если успешно открыт или false, если не успешно</returns>
         public bool? Open()
         {
             try
@@ -46,7 +59,11 @@ namespace FileData
             {
                 return false;
             }
-        }
+        }/// <summary>
+         /// Открытие файла
+         /// </summary>
+         /// <param name="path">Путь к файлу</param>
+         /// <returns>true, если успешно открыт или false, если не успешно</returns>
         public bool? Open(string path)
         {
             Path = path;

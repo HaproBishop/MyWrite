@@ -9,7 +9,7 @@ namespace WPF.TextWork
     /// </summary>
     public partial class GoerTo : Window
     {
-        public int PosID { get; private set; } = -1;
+        public int PosID { get; private set; } = -1;//Задание начальной позиции (вернее, ее отсутствие)
         public int LineID { get; private set; } = -1;
         public GoerTo()
         {
@@ -20,7 +20,7 @@ namespace WPF.TextWork
             try
             {
                 LineID = Convert.ToInt32(LineValue.Text);
-                DialogResult = true;
+                DialogResult = true;//Результат диалогового окна 
                 Close();
             }
             catch
@@ -46,7 +46,9 @@ namespace WPF.TextWork
                 PosValue.Clear();
                 PosValue.Focus();
             }
-        }
+        }/// <summary>
+        /// Очистка позиций при неправльном вводе
+        /// </summary>
         public void Clear()
         {
             PosID = -1;
@@ -56,50 +58,6 @@ namespace WPF.TextWork
         private void Window_Activated(object sender, EventArgs e)
         {
             PosValue.Focus();
-        }
-    }
-    /// <summary>
-    /// Заготовленный класс для будущей реализации поиска слова в строке
-    /// </summary>
-    public class FindData
-    {
-        public int StartIndex { get; private set; }
-        public int EndIndex { get; private set; }
-        public string SubWord { get; set; }
-        public TextRange MyText { get; set; }
-        public FindData() { }
-        public FindData(TextRange text)
-        {
-            MyText = text;
-        }
-        public FindData(TextRange text, string subWord)
-        {
-            MyText = text;
-            SubWord = subWord;
-        }
-        public void GiveValues(TextRange text, string subWord)
-        {
-            MyText = text;
-            SubWord = subWord;
-        }
-        public bool? FindSubWord()
-        {
-            if (SubWord != "")
-            {
-                StartIndex = MyText.Text.IndexOf(SubWord);
-                if (StartIndex != -1)
-                {
-                    EndIndex = MyText.Text.Length - (MyText.Text.Length - SubWord.Length) - 1;
-                    return true;
-                }
-            }
-            return false;
-        }
-        public void Clear()
-        {
-            StartIndex = 0;
-            EndIndex = 0;
-            SubWord = "";
         }
     }
 }

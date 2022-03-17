@@ -34,5 +34,12 @@
         public AdvancedChanger() : base() { }
         public AdvancedChanger(string title) : base(title) { }
         public AdvancedChanger(string title, string fileName) : base(title, fileName) { }
+        /// <summary>
+        /// Очищает имя файла
+        /// </summary>
+        public new void Clear()
+        {
+            FileName = "";
+        }
     }
 }

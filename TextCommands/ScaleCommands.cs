@@ -1,7 +1,9 @@
 ﻿using System.Windows.Input;
 
 namespace TextCommands
-{
+{/// <summary>
+///  Статический класс команд по работе с масштабом
+/// </summary>
     public class ScaleCommands
     {
             static ScaleCommands()
@@ -22,8 +24,8 @@ namespace TextCommands
             };
                 CommandScaleDefault = new RoutedCommand("CommandDefaultScale", typeof(ScaleCommands), inputScaleDefault);
             }
-            public static RoutedCommand CommandScalePlus { get; private set; }
-            public static RoutedCommand CommandScaleMinus { get; private set; }
-            public static RoutedCommand CommandScaleDefault { get; private set; }
+            public static RoutedCommand CommandScalePlus { get; private set; }//Команда увеличения масштаба
+            public static RoutedCommand CommandScaleMinus { get; private set; }//Команда уменьшения масштаба
+            public static RoutedCommand CommandScaleDefault { get; private set; }//Команда установки дефолтного масштаба
     }
 }
