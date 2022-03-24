@@ -80,10 +80,19 @@ namespace MyWrite
                     if (yesNo)//Проверка ответа пользователя
                     {
                         Save_Click(sender, e);
-                    }
+                    }                   
                 }
                 else return;//Происходит при нажатии Cancel
             }
+            if (_withoutDialogCancel)
+            {
+                DoOpenFileDialog();
+            }
+            _withoutDialogCancel = true;
+            CurrentScale.Text = (scale.ScaleY * 100).ToString();//Обновление значения Scale при открытии диалогового окна (появляется баг, пришлось оставить)
+        }
+        private void DoOpenFileDialog()
+        {
             OpenFileDialog open = new OpenFileDialog
             {
                 Title = "Открыть",
@@ -91,16 +100,18 @@ namespace MyWrite
                 DefaultExt = "rtf",
             };
             if (open.ShowDialog() == true)
-            {                                
+            {
                 if (_fileInfo.Open(open.FileName) == true)
                 {
                     _titleChanger.FileName = open.SafeFileName;
                     Title = _titleChanger.FullTitle;
                 }
             }
-            CurrentScale.Text = (scale.ScaleY * 100).ToString();//Обновление значения Scale при открытии диалогового окна (появляется баг, пришлось оставить)
         }
-        bool _commandProver;//Используется для идентификации команды в условии
+
+        bool _commandProver;//Используется для идентификации команды в условии------------------------------------------------------
+        bool _withoutDialogCancel = true;//Используется для идентификации отмены диалога сохранения файла---------------------------------------------------
+
         private void Save_Click(object sender, RoutedEventArgs e)//--------------------------Нажатие "Сохранить (как)"
         {
             if (_titleChanger.FileName == "" || e.Source == SaveAs || e.Source == SaveAsTB || e.Source == Create || _commandProver)
@@ -112,13 +123,14 @@ namespace MyWrite
                     DefaultExt = "rtf",
                 };
                 if (save.ShowDialog() == true)
-                {                    
+                {
                     if (_fileInfo.Save(save.FileName) == true)
                     {
                         _titleChanger.FileName = save.SafeFileName;//Добавление имени файла
                         Title = _titleChanger.FullTitle;//Задание нового "дефолтного" наименования
                     }
                 }
+                else _withoutDialogCancel = false;
             }
             else
             {
@@ -196,7 +208,7 @@ namespace MyWrite
         }
         private void AboutProgram_Click(object sender, RoutedEventArgs e)//--------------------------Нажатие "О программе"
         {
-            MessageBox.Show("Версия 1.0.0.1. Разработчиком является Лопаткин Сергей (GitHub.Name: Hapro Bishop) из группы ИСП-31", "О программе", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Версия 1.0.1.0. Разработчиком является Лопаткин Сергей (GitHub.Name: Hapro Bishop) из группы ИСП-31", "О программе", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         int line,//Offset от текущей строки -- используется для нескольких событий
             currentChar;//Текущее кол-во символо
@@ -249,6 +261,10 @@ namespace MyWrite
                     if (yesNo)
                     {
                         Save_Click(sender, new RoutedEventArgs());
+                        if (!_withoutDialogCancel)
+                        {                             
+                            e.Cancel = _withoutDialogCancel = true;//Присвоение отмены, а также сброс идентификатора отмены
+                        }
                     }
                 }
                 else e.Cancel = true;
